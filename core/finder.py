@@ -30,7 +30,7 @@ def find_pattern(file_path, hex_pattern):
     if len(found_offset) > 1:
         raise ValueError(f"Pattern found {len(found_offset)} times in the apk, please add more bytes to it to get a more precise search")
 
-    return found_offset
+    return found_offset[0]
 
 def get_libs(work_dir, filter_name=None):
     libs = []

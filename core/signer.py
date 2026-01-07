@@ -7,7 +7,7 @@ ALIAS_NAME = "androiddebugkey"
 
 def sign_apk(apk_path):
     if not os.path.exists(KEYSTORE_PATH):
-        print("Generating a keystore...")
+        print(f"Generating a keystore, keypass : {KEYSTORE_PASS}...")
         cmd(f'keytool -genkey -v -keystore {KEYSTORE_PATH} -storepass {KEYSTORE_PASS} -alias {ALIAS_NAME} -keypass {KEYSTORE_PASS} -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"')
 
     print(f"Signing the APK...")

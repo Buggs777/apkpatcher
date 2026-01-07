@@ -2,3 +2,4 @@ working*
 apkpatcher_workingdir/
 __pycache__/
 *.pyc
+*.apk

@@ -2,6 +2,7 @@ import os
 import argparse
 import sys
 import shutil
+import traceback
 from core import unpack, repack, sign_apk, find_pattern, patch_library, get_libs, find_lib_path_by_name
 
 DEFAULT_OUTPUT = "apk_patch.apk"
@@ -51,13 +52,14 @@ def main():
         print(f"Patching Logic Error: {e}")
         sys.exit(1)
     except Exception as e:
-        print(f"Critical Error: {e}")
+        print(traceback.format_exc())
         sys.exit(1)
 
     repack(TEMP_DIR, args.output)
     sign_apk(args.output)
     
     print(f"\nSuccess, patched APK: {args.output}")
+    shutil.rmtree(TEMP_DIR)
 
 if __name__ == "__main__":
     main()
