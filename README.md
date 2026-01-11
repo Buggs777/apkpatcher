@@ -53,3 +53,29 @@ python apkpatcher.py -i protected_game.apk --dump ./dumps/libil2cpp.so -f "20008
 _Note: In this mode, the script finds the matching filename inside the APK, replaces it with your dump, applies the patch, and repacks everything._
 
 _For educational purposes only._
+
+
+# Smali Patcher Usage
+
+This script unpacks an APK, patches a specific method in a smali file to always return `true`, and then repacks and signs the APK.
+
+The script is not definitive and for now is only usable to return True on specific smali functions, you can still modify in core/patcher.py the smali function to patch with your assembly
+```
+python smalipatcher.py -i <APK_FILE> -p <PATH_TO_SMALI> -f <METHOD_NAME>
+```
+
+### Arguments
+
+| Flag | Description | Required | Example |
+| :--- | :--- | :--- | :--- |
+| `-i`, `--input` | Path to input APK | Yes | `app.apk` |
+| `-p`, `--path-smali-patch` | Relative path to the smali file inside the unpacked directory | Yes | `smali_classes2/com/example/Feature.smali` |
+| `-f`, `--function-to-patch` | The name of the method to patch to return `true` | Yes | `isPremium` |
+
+### Example
+
+```
+python smalipatcher.py -i app.apk -p "smali/com/example/billing/License.smali" -f "isPremium"
+```
+
+This will patch the `isPremium` method in the specified smali file to always return true.
